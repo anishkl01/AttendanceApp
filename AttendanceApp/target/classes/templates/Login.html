@@ -1,0 +1,53 @@
+ <!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	crossorigin="anonymous">
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- Including jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js">
+    </script>
+
+    <!-- Including Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+    </script>
+<title>Login Form</title>
+</head>
+<body>
+	 <div class="container">
+	
+		<form th:action=@{/login/success} method="post" th:body=${userlogin}>
+            <h1 class="text-center">Login Page</h1>
+			<div class="mb-3">
+				<label for="exampleInputEmail1" class="form-label">Username
+					</label> <input type="text" class="form-control"
+					id="exampleInputEmail1" name="username" aria-describedby="emailHelp" th:value=${userlogin.username}>
+	  <p th:if="${param.error}" class="alert alert-danger" id="alert" th:text="${usererror}"></p>
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputPassword1" class="form-label">Password</label>
+				<input type="password" class="form-control"
+				name="password"	id="exampleInputPassword1" th:value=${userlogin.password}>
+				<p th:if="${param.errorpass}" class="alert alert-danger" id="alert" th:text="${passerror}"></p>
+			</div>
+			<button type="submit" class="btn btn-primary">Login</button>
+		</form>
+		<div>
+			<a th:href="@{/register}">Register</a>
+		</div>
+	</div>
+</body>
+ <script type="text/javascript">
+        setTimeout(function () {
+
+            // Closing the alert
+            $('#alert').alert('close');
+        }, 5000);
+    </script>
+</html>

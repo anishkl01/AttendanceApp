@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	crossorigin="anonymous">
+<title>Register</title>
+</head>
+<body>
+	 <div class="container">
+	 <h6  th:if="${param.success}" class="alert alert-success">Registered Successfully</h6>
+	<h6   th:if="${param.error}" class="alert alert-danger">please give all credential</h6>
+        <form th:action=@{/register/success} th:body=${userregister} method="post">
+            <h1 class="text-center">Register Page</h1>
+			<div class="mb-3">
+				<label for="exampleInputEmail1" class="form-label">Username
+					</label> <input type="text" class="form-control"
+					id="exampleInputEmail1" name="ruser" th:value=${userregister.ruser} aria-describedby="emailHelp">
+			<p   th:if="${param.errorusername}" class="alert alert-danger" th:text="${usernameexist}"></p>
+			
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputPassword1" class="form-label">Password</label>
+				<input type="password" class="form-control" name="rpassword"
+					id="exampleInputPassword1" th:value=${userregister.rpassword}>
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputPassword1" class="form-label">Email ID</label>
+				<input type="email" class="form-control"
+					id="exampleInputPassword1" name="email" th:value=${userregister.email}>
+			</div>
+			<div class="mb-3">
+				<label for="exampleInputPassword1" class="form-label">Phone NO</label>
+				<input type="number" class="form-control"
+					id="exampleInputPassword1" name="register_phonenumber"  th:value=${userregister.register_phonenumber}>
+			</div>
+			<button type="submit" class="btn btn-primary">Register</button>
+		
+			
+		</form>
+    	<div>
+ 		   <a th:href=@{/login}>Login</a>
+    	</div>
+    </div>
+</body>
+</html>

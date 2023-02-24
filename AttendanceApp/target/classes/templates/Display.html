@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- Including jQuery -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js">
+	
+</script>
+
+<!-- Including Bootstrap JS -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+	
+</script>
+<title>Display</title>
+</head>
+<body>
+	<nav class="navbar navbar-dark bg-primary d-flex flex-row">
+		<ul class="navbar-nav">
+			<li class="nav-item active mr-auto p-2">
+				<h3 th:text="Hello+' '+${username}"></h3>
+			</li>
+			<li class="nav-item active text-right p-2">
+				<form th:action="@{/logout}" method="get">
+					<button type="submit" class="btn btn-danger p-2">LogOut</button>
+				</form>
+			</li>
+		</ul>
+	</nav>
+	<div class="container mt-5">
+		<span th:if="${param.success}"
+			class="alert alert-success text-center " id="alert">successfully
+			logged in</span>
+		<div class="text-center">
+			<h3 th:text="${#dates.format(date, 'dd MMM yyyy HH:mm:ss')}"></h3>
+		</div>
+		<div class="text-center">
+			<div class="mt-5">
+				<form th:action="@{/signin}" method="post" th:object=${signin}>
+					<input type="hidden" name="value" th:value="${signin.value}">
+					<input type="hidden" name="date"
+						th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}">
+					<input type="hidden" name="username" th:value="${signin.username}">
+					<button type="submit" th:hidden="${not button}"
+						class="btn btn-primary">SignIn</button>
+				</form>
+			</div>
+			<div class="mt-5">
+				<form th:action="@{/signout}" method="post" th:object=${signout}>
+					<input type="hidden" name="out_value"
+						th:value="${signout.out_value}"> <input type="hidden"
+						name="out_date"
+						th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}">
+					<input type="hidden" name="username" th:value="${signout.username}">
+					<button type="submit" th:hidden="${button}" class="btn btn-primary">SignOut</button>
+				</form>
+
+			</div>
+		</div>
+		<div>
+
+			<form th:action="@{/viewreport}" method="post" th:body=${uservalue}
+				class="text-center mt-5">
+				<input type="hidden" th:value=${uservalue}>
+				<button type="submit" class="btn btn-primary">View Report</button>
+			</form>
+
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+	setTimeout(function() {
+
+		// Closing the alert
+		$('#alert').alert('close');
+	}, 3000);
+</script>
+</html>
